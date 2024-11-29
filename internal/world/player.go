@@ -40,9 +40,9 @@ func (player *Player) WriteRoom(message string) {
 	room := player.GetRoom()
 
 	for _, otherPlayer := range room.Players {
-		fmt.Println("player: %v", otherPlayer)
+		fmt.Println("player: " + otherPlayer.Username)
 		if otherPlayer.Username != player.Username {
-			fmt.Println("Sending message to player: %v", otherPlayer)
+			fmt.Println("Sending message to player: " + otherPlayer.Username)
 			otherPlayer.Write(message)
 		}
 	}
