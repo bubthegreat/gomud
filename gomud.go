@@ -26,7 +26,7 @@ func main() {
 	// Initialize global state with the loaded area
 	for id, room := range area.Rooms {
 		world.GlobalState.Rooms[id] = room
-		fmt.Println("Rooms[%d]: %v", id, room)
+		fmt.Printf("Rooms[%s]: %v\n", id, room)
 	}
 
 
