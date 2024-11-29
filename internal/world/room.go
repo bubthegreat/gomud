@@ -9,7 +9,7 @@ type Room struct {
 	Exits       map[string]string `json:"exits"` // e.g., {"north": "room2"}
 	Items       []string          `json:"items"`
 	Doors       map[string]bool   `json:"doors"` // e.g., {"north": true} for open doors
-	Players  map[string]*Player
+	Players  	map[string]*Player `json:"players"`
 }
 
 // Describe generates a string representation of the room
@@ -24,12 +24,12 @@ func (r *Room) Describe() string {
 	return description
 }
 
-func NewRoom(id, name string) *Room {
+func (gs GameState) NewRoom(id, name string) *Room {
 	return &Room{
 		ID:          id,
 		Name:        name,
 		Description: "A generic room.",
 		Exits:       make(map[string]string),
-		Players:       make(map[string]*Player),
+		Players:     make(map[string]*Player),
 	}
 }

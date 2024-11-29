@@ -14,13 +14,20 @@ type Player struct {
 
 
 // NewPlayer returns a new Player instance
-func NewPlayer(name string, conn net.Conn) *Player {
+func NewPlayer(username string, conn net.Conn) *Player {
 
 	newPlayer := &Player{
-		Username:     name,
-		Conn:     conn,
+		Username:   username,
+		Conn:     	conn,
 	}
+
+	fmt.Printf("New player instance created for %s\n", username)
+
 	GlobalState.Players[newPlayer.Username] = newPlayer
+
+	fmt.Printf("New player instance added to global state for %s\n", username)
+
+
 	return newPlayer
 }
 
@@ -56,13 +63,23 @@ func (player *Player) GetRoom() *Room {
 
 // SetRoom Set the room a user should be in with a room ID
 func (player *Player) SetRoom(roomID string) {
+	fmt.Printf("Trying to set room %v for player %v\n", player, roomID)
 	// remove from old room
 	oldRoom, exists := GlobalState.Rooms[player.RoomID]
+
 	if exists {
+		fmt.Printf("Removing player %v from room %v\n", player, oldRoom)
 		delete(oldRoom.Players, player.Username)
 	}
 
 	newRoom := GlobalState.Rooms[roomID]
+	fmt.Printf("Assinging player %v to room %v\n", player, newRoom)
+
 	player.RoomID = newRoom.ID
+
+	fmt.Printf("Player room ID updated to %s\n", newRoom.ID)
+
+	fmt.Printf("Room %v, players: %v", newRoom, newRoom.Players)
+
 	newRoom.Players[player.Username] = player
 }

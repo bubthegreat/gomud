@@ -1,0 +1,33 @@
+{
+	"name": "Default Area",
+	"rooms": {
+		"1": {
+			"id": "1",
+			"name": "First Room",
+			"description": "This is a generic room.",
+			"exits": {
+				"north": "2"
+			},
+			"players": {}
+		},
+		"2": {
+			"id": "2",
+			"name": "Second Room",
+			"description": "This is a generic room.",
+			"exits": {
+				"north": "3",
+				"south": "1"
+			},
+			"players": {}
+		},
+		"3": {
+			"id": "3",
+			"name": "Third Room",
+			"description": "This is a generic room.",
+			"exits": {
+				"south": "2"
+			},
+			"players": {}
+		}
+	}
+}

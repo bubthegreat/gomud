@@ -3,12 +3,14 @@ package world
 import (
 	"encoding/json"
 	"os"
+	"fmt"
 )
 
 
 
 // Area represents a set of rooms
 type Area struct {
+	Name string `json:"name"`
 	Rooms map[string]*Room `json:"rooms"`
 }
 
@@ -26,5 +28,6 @@ func LoadArea(filename string) (Area, error) {
 	if err != nil {
 		return Area{}, err
 	}
+	fmt.Println("Area: ", area)
 	return area, nil
 }

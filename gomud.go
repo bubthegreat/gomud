@@ -11,21 +11,24 @@ import (
 
 // main runs main program
 func main() {
-	// Load the area
-	// area, err := world.LoadArea("assets/areas/sample_area.json")
-	// if err != nil {
-	// 	panic(err)
-	// }
 
-	// // Initialize global state with the loaded area
-	// for id, room := range area.Rooms {
-	// 	world.GlobalState.Rooms[id] = room
-	// }
-
+	
 	commands.RegisterCommands()
 	commands.RegisterShortcuts()
 
-	initializeRooms()
+
+	// Load the area
+	area, err := world.LoadArea("./internal/areas/default.json")
+	if err != nil {
+		panic(err)
+	}
+
+	// Initialize global state with the loaded area
+	for id, room := range area.Rooms {
+		world.GlobalState.Rooms[id] = room
+		fmt.Println("Rooms[%d]: %v", id, room)
+	}
+
 
 	fmt.Println("Starting MUD server...")
 	listener, err := net.Listen("tcp", ":4000")
@@ -94,31 +97,4 @@ func handlePlayerConnection(conn net.Conn) {
 	}
 }
 
-// initializeRooms sets up example rooms and exits
-func initializeRooms() {
-	// Create some rooms for players to move between
-	room1 := world.NewRoom("1", "Starting Room")
-	room1.Description = "This is the starting room. There are exits to the north and east."
-	room1.Exits = map[string]string{
-		"north": "2",
-		"east":  "3",
-	}
 
-	room2 := world.NewRoom("2", "North Room")
-	room2.Description = "This is the north room. You can go back to the south."
-	room2.Exits = map[string]string{
-		"south": "1",
-	}
-
-	room3 := world.NewRoom("3", "East Room")
-	room3.Description = "This is the east room. You can go back to the west."
-	room3.Exits = map[string]string{
-		"west": "1",
-	}
-
-	// Add rooms to the game state
-	world.GlobalState.Rooms["1"] = room1
-	world.GlobalState.Rooms["2"] = room2
-	world.GlobalState.Rooms["3"] = room3
-
-}

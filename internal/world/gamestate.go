@@ -18,6 +18,7 @@ var GlobalState = &GameState{
 }
 
 
+
 // Broadcast sends a message to all players in a given room, but this should be moved to the room object.
 func (gs *GameState) Broadcast(roomID string, message string) {
 	fmt.Println("Attempting to broadcast some shit in room", roomID, ": ", message)
@@ -39,3 +40,4 @@ func (gs *GameState) Broadcast(roomID string, message string) {
 		}
 	}
 }
+
